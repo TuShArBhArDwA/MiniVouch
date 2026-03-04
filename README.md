@@ -129,4 +129,4 @@ If you’d like to connect, feel free to reach out — [Click here](https://mini
 
 ---
 
-**[Try MiniVouch](https://minianonvouch.vercel.app/)** | **[Submit Feedback](https://github.com/TuShArBhArDwA/MiniLink/issues)**
+**[Try MiniVouch](https://minianonvouch.vercel.app/)** | **[Submit Feedback](https://github.com/TuShArBhArDwA/MiniVouch/issues)**
