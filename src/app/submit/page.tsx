@@ -244,7 +244,6 @@ export default function SubmitPage() {
                     <div
                         className="animate-fade-in-up"
                         style={{
-                            display: "inline-block",
                             padding: "0.375rem 1rem",
                             borderRadius: "9999px",
                             border: "1px solid var(--color-border)",
