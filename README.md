@@ -51,7 +51,7 @@ Say goodbye to messy screenshots and unverified quotes. MiniVouch ensures authen
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/yourusername/minivouch.git
+git clone https://github.com/TuShArBhArDwA/minivouch.git
 cd MiniVouch
 npm install
 ```
