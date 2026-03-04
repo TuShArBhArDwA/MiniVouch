@@ -528,9 +528,9 @@ export default function DashboardPage() {
 
                                                 {/* Photo, Name, Profession */}
                                                 {!editIsAnonymous && (
-                                                    <div style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
-                                                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
-                                                            <label style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--color-muted)" }}>Photo</label>
+                                                    <div style={{ display: "flex", gap: "1.25rem", alignItems: "flex-start", flexWrap: "wrap" }}>
+                                                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem", flexShrink: 0 }}>
+                                                            <label style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--color-muted)", alignSelf: "flex-start" }}>Photo</label>
                                                             <div style={{ width: "3.5rem", height: "3.5rem", position: "relative" }}>
                                                                 {editAvatarPreview ? (
                                                                     <div style={{ width: "100%", height: "100%", position: "relative" }}>
@@ -545,7 +545,7 @@ export default function DashboardPage() {
                                                                 )}
                                                             </div>
                                                         </div>
-                                                        <div style={{ flex: 1, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
+                                                        <div style={{ flex: "1 1 250px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "0.75rem" }}>
                                                             <div>
                                                                 <label style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--color-muted)", display: "block", marginBottom: "0.375rem" }}>Name</label>
                                                                 <input className="input" type="text" value={editName} onChange={(e) => setEditName(e.target.value)} placeholder="Full Name" style={{ width: "100%" }} />
@@ -601,13 +601,13 @@ export default function DashboardPage() {
                                             </div>
 
                                             {/* Footer Buttons */}
-                                            <div style={{ padding: "1.25rem 1.5rem", background: "rgba(0,0,0,0.03)", borderTop: "1px solid var(--color-border)", display: "flex", gap: "1rem", justifyContent: "flex-end" }}>
-                                                <button onClick={() => setEditingId(null)} className="btn-outline" style={{ padding: "0.625rem 1.5rem", fontSize: "0.875rem" }}>
+                                            <div style={{ padding: "1.25rem 1.5rem", background: "rgba(0,0,0,0.03)", borderTop: "1px solid var(--color-border)", display: "flex", gap: "0.75rem", justifyContent: "flex-end", flexWrap: "wrap" }}>
+                                                <button onClick={() => setEditingId(null)} className="btn-outline" style={{ padding: "0.625rem 1.25rem", fontSize: "0.875rem", flex: "1 1 auto", maxWidth: "200px" }}>
                                                     Cancel
                                                 </button>
-                                                <button onClick={handleEdit} disabled={editSaving || editUploadingImage || editUploadingAvatar || !editMessage.trim()} className="btn-primary" style={{ padding: "0.625rem 2rem", fontSize: "0.875rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                                                <button onClick={handleEdit} disabled={editSaving || editUploadingImage || editUploadingAvatar || !editMessage.trim()} className="btn-primary" style={{ padding: "0.625rem 1.5rem", fontSize: "0.875rem", display: "flex", alignItems: "center", gap: "0.5rem", flex: "2 1 auto", maxWidth: "300px" }}>
                                                     {(editSaving || editUploadingImage || editUploadingAvatar) && <span className="loader" style={{ width: "1rem", height: "1rem", borderWidth: "2px" }} />}
-                                                    {editSaving || editUploadingImage || editUploadingAvatar ? "Processing..." : "Save Testimonial"}
+                                                    {editSaving || editUploadingImage || editUploadingAvatar ? "Wait..." : "Save Changes"}
                                                 </button>
                                             </div>
                                         </div>
