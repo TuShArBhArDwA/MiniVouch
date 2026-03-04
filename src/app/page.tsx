@@ -153,15 +153,13 @@ export default function HomePage() {
                     >
                         Share Your Experience →
                     </Link>
-                    <a
-                        href="https://tushar-bhardwaj.vercel.app/"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                    <Link
+                        href="/about"
                         className="btn-outline"
                         style={{ textDecoration: "none", padding: "0.75rem 2rem", fontSize: "0.9375rem" }}
                     >
                         Who is Mini Anon?
-                    </a>
+                    </Link>
                 </div>
             </div>
 
