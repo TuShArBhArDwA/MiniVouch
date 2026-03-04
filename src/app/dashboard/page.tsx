@@ -647,7 +647,7 @@ export default function DashboardPage() {
                                         </>
                                     )}
                                 </div>
-                                <StatusBadge status={t.status} />
+                                {editingId !== t.id && <StatusBadge status={t.status} />}
                             </div>
 
                             {/* Edit/Delete actions — only for pending and not editing */}

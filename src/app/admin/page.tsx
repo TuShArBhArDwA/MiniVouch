@@ -26,6 +26,7 @@ export default function AdminPage() {
     const [activeTab, setActiveTab] = useState<Tab>("pending");
     const [actionLoading, setActionLoading] = useState<string | null>(null);
     const [unauthorized, setUnauthorized] = useState(false);
+    const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
 
     useEffect(() => {
         loadTestimonials();
@@ -70,7 +71,6 @@ export default function AdminPage() {
     }
 
     async function deleteTestimonial(id: string) {
-        if (!confirm("Are you sure you want to delete this testimonial?")) return;
         setActionLoading(id);
         try {
             await fetch("/api/testimonials/admin", {
@@ -79,6 +79,7 @@ export default function AdminPage() {
                 body: JSON.stringify({ id }),
             });
             setTestimonials((prev) => prev.filter((t) => t.id !== id));
+            setDeleteConfirmId(null);
         } catch {
             // Handle error silently
         }
@@ -425,37 +426,68 @@ export default function AdminPage() {
                                     gap: "0.5rem",
                                     borderTop: "1px solid var(--color-border)",
                                     paddingTop: "0.75rem",
+                                    alignItems: "center"
                                 }}
                             >
-                                {t.status !== "approved" && (
-                                    <button
-                                        className="btn-success"
-                                        onClick={() => updateStatus(t.id, "approved")}
-                                        disabled={actionLoading === t.id}
-                                    >
-                                        Approve
-                                    </button>
+                                {deleteConfirmId === t.id ? (
+                                    <>
+                                        <span style={{ fontSize: "0.8125rem", color: "var(--color-danger)", fontWeight: 600, marginRight: "auto" }}>
+                                            Are you sure you want to delete this?
+                                        </span>
+                                        <button
+                                            className="btn-outline"
+                                            onClick={() => setDeleteConfirmId(null)}
+                                            disabled={actionLoading === t.id}
+                                            style={{ fontSize: "0.75rem", padding: "0.4rem 0.75rem" }}
+                                        >
+                                            Cancel
+                                        </button>
+                                        <button
+                                            className="btn-danger"
+                                            onClick={() => deleteTestimonial(t.id)}
+                                            disabled={actionLoading === t.id}
+                                            style={{ fontSize: "0.75rem", padding: "0.4rem 0.75rem" }}
+                                        >
+                                            {actionLoading === t.id ? (
+                                                <span className="loader" style={{ width: "0.75rem", height: "0.75rem", borderWidth: "2px" }} />
+                                            ) : (
+                                                "Confirm Delete"
+                                            )}
+                                        </button>
+                                    </>
+                                ) : (
+                                    <>
+                                        {t.status !== "approved" && (
+                                            <button
+                                                className="btn-success"
+                                                onClick={() => updateStatus(t.id, "approved")}
+                                                disabled={actionLoading === t.id}
+                                            >
+                                                Approve
+                                            </button>
+                                        )}
+                                        {t.status !== "rejected" && (
+                                            <button
+                                                className="btn-outline"
+                                                onClick={() => updateStatus(t.id, "rejected")}
+                                                disabled={actionLoading === t.id}
+                                                style={{
+                                                    fontSize: "0.8125rem",
+                                                }}
+                                            >
+                                                Reject
+                                            </button>
+                                        )}
+                                        <button
+                                            className="btn-danger"
+                                            onClick={() => setDeleteConfirmId(t.id)}
+                                            disabled={actionLoading === t.id}
+                                            style={{ marginLeft: "auto" }}
+                                        >
+                                            Delete
+                                        </button>
+                                    </>
                                 )}
-                                {t.status !== "rejected" && (
-                                    <button
-                                        className="btn-outline"
-                                        onClick={() => updateStatus(t.id, "rejected")}
-                                        disabled={actionLoading === t.id}
-                                        style={{
-                                            fontSize: "0.8125rem",
-                                        }}
-                                    >
-                                        Reject
-                                    </button>
-                                )}
-                                <button
-                                    className="btn-danger"
-                                    onClick={() => deleteTestimonial(t.id)}
-                                    disabled={actionLoading === t.id}
-                                    style={{ marginLeft: "auto" }}
-                                >
-                                    Delete
-                                </button>
                             </div>
                         </div>
                     ))}
